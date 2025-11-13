@@ -1,98 +1,115 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
-
-export default function HomeScreen() {
+export default function ProfileScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+    <View style={styles.container}>
+      {/* Header Section */}
+      <View style={styles.header}>
+        <View style={styles.headerBackground} />
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={require("@/assets/images/profile-pic.jpg")}
+          style={styles.profileImage}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+      </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      {/* User Info */}
+      <Text style={styles.name}>John Doe</Text>
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.label}>Phone</Text>
+        <Text style={styles.value}>9876543210</Text>
+      </View>
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.label}>Mail</Text>
+        <Text style={styles.value}>example@gmail.com</Text>
+      </View>
+
+      {/* Options Section */}
+      <View style={styles.optionContainer}>
+        <TouchableOpacity style={styles.option}>
+          <Ionicons name="person-outline" size={22} color="#000" />
+          <Text style={styles.optionText}>Profile details</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.option}>
+          <Ionicons name="settings-outline" size={22} color="#000" />
+          <Text style={styles.optionText}>Settings</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.option}>
+          <Ionicons name="log-out-outline" size={22} color="red" />
+          <Text style={[styles.optionText, { color: "red" }]}>Log out</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    paddingTop: 40,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  header: {
+    alignItems: "center",
+    width: "100%",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  headerBackground: {
+    backgroundColor: "#c8b6ff", // light violet shade
+    width: "100%",
+    height: 120,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    position: "absolute",
+    top: 70,
+    borderWidth: 4,
+    borderColor: "#FFF",
+  },
+  name: {
+    marginTop: 60,
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  infoContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
+    marginTop: 10,
+  },
+  label: {
+    fontSize: 14,
+    color: "#777",
+  },
+  value: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#000",
+  },
+  optionContainer: {
+    marginTop: 30,
+    width: "85%",
+    borderTopWidth: 1,
+    borderTopColor: "#ddd",
+  },
+  option: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  optionText: {
+    marginLeft: 10,
+    fontSize: 16,
+    color: "#000",
   },
 });
