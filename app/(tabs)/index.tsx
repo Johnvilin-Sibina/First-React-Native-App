@@ -1,6 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Pressable,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
+
+export const unstable_settings = {
+  headerTitle: "Profile",
+};
 
 export default function ProfileScreen() {
   return (
@@ -36,7 +48,11 @@ export default function ProfileScreen() {
 
         <TouchableOpacity style={styles.option}>
           <Ionicons name="settings-outline" size={22} color="#000" />
-          <Text style={styles.optionText}>Settings</Text>
+          <Link href="/settings" asChild>
+            <Pressable>
+              <Text style={styles.optionText}>Settings</Text>
+            </Pressable>
+          </Link>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.option}>
@@ -60,7 +76,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   headerBackground: {
-    backgroundColor: "#c8b6ff", // light violet shade
+    backgroundColor: "#c8b6ff",
     width: "100%",
     height: 120,
   },
